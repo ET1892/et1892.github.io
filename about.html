@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+<link rel="shortcut icon" type="image/x-icon" href="logo/favicon.ico">
+
+<link rel="stylesheet" href="../stars/travel.css">
+
+<style>
+
+
+body {
+  background-color: black;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: background-color 2s; 
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background-color: rgba(22, 22, 23, .81);
+  padding: .5% 5%;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  margin-right: 1.25%;
+}
+
+.navbar-logo img {
+  vertical-align: middle;
+  transition: transform 0.2s;
+}
+
+.navbar-logo img:hover {
+  transform: scale(1.2);
+}
+
+.navbar a {
+  color: white;
+  text-align: center;
+  padding: 1% 2.5%;
+  text-decoration: none;
+  transition: transform 0.2s;
+}
+
+.navbar a:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+
+
+.navbar a.active {
+  text-decoration: underline;
+}
+
+.content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  font-size: 3em;
+  z-index: 20;
+  opacity: 0; 
+  animation: fadeIn 7s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; 
+  }
+  to {
+    opacity: 1; 
+  }
+}
+
+
+
+
+
+
+.content h1 {
+  animation: fadeInHello 5s forwards; 
+}
+
+.content h2 {
+  animation: fadeInName 12s forwards; 
+  font-size: 0.5em; 
+}
+
+@keyframes fadeInHello {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInName {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 100%) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar a {
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="overlay"></div>
+
+<div class="navbar">
+  <div class="navbar-logo">
+    <a href="homepage.html">
+      <img src="logo/logo.svg" alt="Logo" width="40" height="40">
+    </a>
+  </div>
+
+
+  <a href="about.html" class="active">About</a>
+  <a href="projects.html">Projects</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+
+
+<div class="content">
+  <div style="color: white; text-align: center;">
+    <h1>Hello!</h1>
+    <h2 style="color: white;">My name is Ethan, I am a CS student who is deeply passionate about technology especially the world of software! Beyond software, I enjoy sports, music, and TV.<br>I bring a blend of technical expertise and fun to everything I do, and I am excited to learn all the time!</h2>
+  </div>
+</div>
+
+</div>
+<div id="sky"></div>
+
+<script>
+let sky, center;
+let animationStopped = false;
+
+function dot(i) {
+  const size = Math.round(Math.random() + 1);
+  const root = document.createElement('span');
+  root.style.top = center.y + 'px';
+  root.style.left = center.x + 'px';
+  root.classList.add('star', `size-${size}`, `axis-${i}`);
+  return root;
+}
+
+function clear() {
+  sky.innerHTML = '';
+}
+
+function init() {
+  sky = document.querySelector('#sky');
+  center = {
+    x: sky.clientWidth / 2,
+    y: sky.clientHeight / 2,
+  };
+  clear();
+  for (let i = 0; i < 360; i++) sky.appendChild(dot(i));
+}
+
+function stopAnimation() {
+  animationStopped = true;
+  const stars = document.querySelectorAll('.star');
+  stars.forEach(star => {
+    star.style.animation = 'none';
+  });
+}
+
+function fadeToBlack() {
+  document.body.classList.add('fade-to-black');
+}
+
+window.onload = function() {
+  setTimeout(fadeToBlack, 3000); 
+  setTimeout(stopAnimation, 10000); 
+  init();
+}
+</script>
+
+</body>
+</html>
